@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Amazing_Bro';
+    src: url('../assets/fonts/Amazing_Bro.ttf');
+}
+
+body {
+    background: url('../assets/img/blackboard.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

@@ -1,0 +1,173 @@
+body {
+    text-align: center;
+}
+
+.container-fluid {
+    position: fixed;
+}
+
+html,
+body,
+#root,
+.container-fluid,
+.full-height {
+    height: 100% !important;
+}
+
+header {
+    position: relative;
+    height: 30px;
+    padding: 0 !important;
+}
+header > div {
+    height: 25px;
+    float: left;
+    margin-top: 2.5px;
+    padding: 0 !important;
+    position: relative;
+}
+
+header > div > button {
+    height: 100%;
+    /* text-align: right; */
+    background: transparent;
+    padding: 0 !important;
+    border: 1px solid #909090;
+    border-radius: 15px;
+}
+
+header > div > button > img {
+    float: left;
+    height: 100%;
+    margin-left: 10px;
+    border-radius: 25px;
+}
+
+.inner-text-of-button-header {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    padding: 0;
+    color: #8AF0D1;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+header > div > input {
+    height: 100%;
+    border-radius: 15px;
+    border: none;
+    background: #DDDDDD;
+    font-size: 20px;
+    font-weight: 500;
+    color: #CF4040;
+}
+
+.border-right { 
+    border-right: 20px solid #AF9D00 !important;
+    /* filter: url('../public/index.html/#chalk'); */
+}
+
+.fix {
+    height: 85px;
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.border-bottom {
+    border-bottom: 20px solid #AF9D00 !important
+}
+
+
+.full-height > .border-right {
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+
+/* Modal */
+
+.modalheader-font-fix {
+    color: black !important;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.fix-box-color {
+    position: absolute;
+    left: 20px;
+}
+
+.fix-box-item {
+    height: 26px !important;
+    border-radius: 14px !important;
+    margin-left: 10px;
+}
+
+.react-datepicker {
+    margin-top: 25px !important;
+}
+
+.listgroup-fix {
+    color: black;
+}
+
+
+.listgroup-fix li{
+    background-color: inherit;
+}
+
+.background-red {
+    background-color: red;
+}
+.background-blue {
+    background-color: blue;
+}
+.background-yellow {
+    background-color: yellow;
+}
+.background-green {
+    background-color: green;
+}
+
+/* Card */
+
+.card {
+    background-color: none !important;
+    margin-bottom: 10px;
+    padding: 0;
+    height: 80px
+}
+
+.card header {
+    height: 20px;
+    /* background-color: green; */
+    padding: 0;
+}
+
+.card header p {
+    text-align: left;
+    float: left;
+    font-size: 30px;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+
+.card header .li-button-fix {
+    width: 15px;
+    height: 15px;
+    margin: 3px;
+    border: none;
+    background-color: transparent;
+    padding: 0 !important;
+    position: relative;
+}
+
+.card header .li-button-fix img {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
