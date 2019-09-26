@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import Input from "reactstrap/es/Input";
-import { InputChange } from './Utility';
+import { InputChange } from './components/utility/Utility';
 import classNames from "classnames";
-import Timer from './Timer';
+// import {default as Entrance} from './components/login/EntrancePermissonPage';
+import Timer from './components/timer/Timer';
 import './App.css';
-import './App.scss';
-import { Login, Register } from "./components/login/index";
 
 class App extends React.Component {
 
@@ -14,33 +13,16 @@ class App extends React.Component {
     modal: false,
     status: {
       title: '',
-      Description: ''
+      Description: '',
+      bgColor: ''
     },
     listStory: [],
     listTodo: [],
     listInProgress: [],
     listTest: [],
-    listDone: [],
-    isLogginActive: true
+    listDone: []
   };
 
-  componentDidMount() {
-    //Add .right by default
-    this.rightSide.classList.add("right");
-  }
-
-  changeState() {
-    const { isLogginActive } = this.state;
-
-    if (isLogginActive) {
-      this.rightSide.classList.remove("right");
-      this.rightSide.classList.add("left");
-    } else {
-      this.rightSide.classList.remove("left");
-      this.rightSide.classList.add("right");
-    }
-    this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
-  }
 
   toggle = () => this.setState(prevState => ({ modal: !prevState.modal }));
 
@@ -57,9 +39,18 @@ class App extends React.Component {
   addToStroy = () => {
     this.setState(prevState => {
       let { listStory, status } = prevState;
+
+      changeColor = (color) => () => {
+        this.setState({
+          status: {
+            bgColor: color
+          }
+        });
+      };
+
       let json = JSON.stringify(status);
       listStory.push(json);
-      return { listStory, status: { ...status, title: '', Description: '' }, modal: false };
+      return { listStory, status: { ...status, title: '', Description: '', bgColor: '' }, modal: false };
     });
   };
 
@@ -135,42 +126,19 @@ class App extends React.Component {
     });
   };
 
-  changeColor = (color) => () => {
-    this.setState({ color });
-  };
-
   render() {
-    const { isLogginActive, modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
-    const current = isLogginActive ? "Register" : "Login";
-    const currentActive = isLogginActive ? "login" : "register";
+    const { modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
 
-    let { title, Description } = this.state.status;
-    const taskUlClass = classNames('listgroup-fix', 'card',
+
+    let { title, Description, bgColor } = this.state.status;
+    const taskUlClass = classNames('listgroup-fix', 'card'/*,
       { 'background-red': color === 'red' },
       { 'background-blue': color === 'blue' },
       { 'background-yellow': color === 'yellow' },
-      { 'background-green': color === 'green' });
+      { 'background-green': color === 'green' }*/);
     return (
       <div className="container-fluid">
-
-        <div className='App'>
-          <div className="login">
-            <div className="container" ref={ref => (this.container = ref)}>
-              {isLogginActive && (
-                <Login containerRef={ref => (this.current = ref)} />
-              )}
-              {!isLogginActive && (
-                <Register containerRef={ref => (this.current = ref)} />
-              )}
-            </div>
-            <RightSide
-              current={current}
-              currentActive={currentActive}
-              containerRef={ref => (this.rightSide = ref)}
-              onClick={this.changeState.bind(this)}
-            />
-          </div>
-        </div>
+        {/* <Entrance /> */}
         <div className='row'>
           <header className='col-md-12'>
             <div className='col-md-3'>
@@ -190,8 +158,12 @@ class App extends React.Component {
                 </ModalBody>
                 <ModalFooter>
                   <div className='fix-box-color'>
-                    <Button color='danger' className='fix-box-item' id='red' onClick={this.changeColor('red')} />
-                    <Button color='info' className='fix-box-item' id='blue' onClick={this.changeColor('blue')} />
+                    <Button color='danger' className='fix-box-item' id='red' onClick={this.addToStroy} >
+                      {/* {bgColor = 'red'} */}
+                    </Button>
+                    <Button color='info' className='fix-box-item' id='blue' onClick={this.addToStroy} >
+                      {/* {bgColor = 'blue'} */}
+                    </Button>
                     <Button color='warning' className='fix-box-item' id='yellow' onClick={this.changeColor('yellow')} />
                     <Button color='success' className='fix-box-item' id='green' onClick={this.changeColor('green')} />
                   </div>
@@ -245,7 +217,7 @@ class App extends React.Component {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
 
-                          <header className='col-md-12' style={{ backgroundColor: this.state.color }}>
+                          <header className='col-md-12' style={{ backgroundColor: bgColor }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delStory.bind(this, index)}
@@ -435,19 +407,5 @@ class App extends React.Component {
     );
   }
 }
-
-const RightSide = props => {
-  return (
-    <div
-      className="right-side"
-      ref={props.containerRef}
-      onClick={props.onClick}
-    >
-      <div className="inner-container">
-        <div className="text">{props.current}</div>
-      </div>
-    </div>
-  );
-};
 
 export default App;
