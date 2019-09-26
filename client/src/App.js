@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import Input from "reactstrap/es/Input";
-import { InputChange } from "./Utility";
-import DatePicker from "react-datepicker";
+import { InputChange } from './Utility';
 import classNames from "classnames";
-import "react-datepicker/dist/react-datepicker.css";
+import Timer from './Timer';
 import './App.css';
+import './App.scss';
+import { Login, Register } from "./components/login/index";
 
 class App extends React.Component {
 
@@ -15,30 +16,31 @@ class App extends React.Component {
       title: '',
       Description: ''
     },
-    add: '',
     listStory: [],
     listTodo: [],
     listInProgress: [],
     listTest: [],
     listDone: [],
-    startDate: new Date(),
-    bgColor: ''
+    isLogginActive: true
   };
 
-  changeInput = e => {
-    const { status } = { ...this.state };
-    const currentState = status;
-    const { name, value } = e.target;
-    currentState[name] = value;
-
-    this.setState({ status: currentState });
+  componentDidMount() {
+    //Add .right by default
+    this.rightSide.classList.add("right");
   }
 
-  handleChange = date => {
-    this.setState({
-      startDate: date
-    });
-  };
+  changeState() {
+    const { isLogginActive } = this.state;
+
+    if (isLogginActive) {
+      this.rightSide.classList.remove("right");
+      this.rightSide.classList.add("left");
+    } else {
+      this.rightSide.classList.remove("left");
+      this.rightSide.classList.add("right");
+    }
+    this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
+  }
 
   toggle = () => this.setState(prevState => ({ modal: !prevState.modal }));
 
@@ -57,9 +59,7 @@ class App extends React.Component {
       let { listStory, status } = prevState;
       let json = JSON.stringify(status);
       listStory.push(json);
-      // let alaki = ({title: prevState.status.title === ''});
-      // let alaki2 = ({title: prevState.status.title === ''});
-      return { listStory, status: {...status,title: '', Description: ''}, modal: false };
+      return { listStory, status: { ...status, title: '', Description: '' }, modal: false };
     });
   };
 
@@ -140,9 +140,11 @@ class App extends React.Component {
   };
 
   render() {
-    const { modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
-    const { title, Description } = this.state.status;
+    const { isLogginActive, modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
+    const current = isLogginActive ? "Register" : "Login";
+    const currentActive = isLogginActive ? "login" : "register";
 
+    let { title, Description } = this.state.status;
     const taskUlClass = classNames('listgroup-fix', 'card',
       { 'background-red': color === 'red' },
       { 'background-blue': color === 'blue' },
@@ -150,6 +152,25 @@ class App extends React.Component {
       { 'background-green': color === 'green' });
     return (
       <div className="container-fluid">
+
+        <div className='App'>
+          <div className="login">
+            <div className="container" ref={ref => (this.container = ref)}>
+              {isLogginActive && (
+                <Login containerRef={ref => (this.current = ref)} />
+              )}
+              {!isLogginActive && (
+                <Register containerRef={ref => (this.current = ref)} />
+              )}
+            </div>
+            <RightSide
+              current={current}
+              currentActive={currentActive}
+              containerRef={ref => (this.rightSide = ref)}
+              onClick={this.changeState.bind(this)}
+            />
+          </div>
+        </div>
         <div className='row'>
           <header className='col-md-12'>
             <div className='col-md-3'>
@@ -163,16 +184,9 @@ class App extends React.Component {
                   <p className='modalheader-font-fix'>New Task</p>
                 </ModalHeader>
                 <ModalBody>
-                  <Input placeholder='title' name='title' value={title} onChange={this.changeInput} />
-                  <Input placeholder='Description' name='Description' value={Description} onChange={this.changeInput} />
-                  <DatePicker
-                    selected={this.state.startDate}
-                    onChange={this.handleChange}
-                    monthsShown={1}
-                    inline
-                    title='Deadline'
-                    placeholderText='Deadline'
-                  />
+                  <Input placeholder='title' name='title' value={title} onChange={InputChange.bind(this)} />
+                  <Input placeholder='Description' name='Description' value={Description} onChange={InputChange.bind(this)} />
+                  <Timer />
                 </ModalBody>
                 <ModalFooter>
                   <div className='fix-box-color'>
@@ -181,7 +195,7 @@ class App extends React.Component {
                     <Button color='warning' className='fix-box-item' id='yellow' onClick={this.changeColor('yellow')} />
                     <Button color='success' className='fix-box-item' id='green' onClick={this.changeColor('green')} />
                   </div>
-                  {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
+                  <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                   <Button color="primary" onClick={this.addToStroy}>Save</Button>
                 </ModalFooter>
               </Modal>
@@ -229,8 +243,9 @@ class App extends React.Component {
                   listStory.length !== 0 ?
                     listStory.map((item, index) => {
                       return (
-                        <ListGroupItem key={index} className={taskUlClass} style={{ backgroundColor: this.state.bgColor }}>
-                          <header className='col-md-12'>
+                        <ListGroupItem key={index} className={taskUlClass}>
+
+                          <header className='col-md-12' style={{ backgroundColor: this.state.color }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delStory.bind(this, index)}
@@ -420,5 +435,19 @@ class App extends React.Component {
     );
   }
 }
+
+const RightSide = props => {
+  return (
+    <div
+      className="right-side"
+      ref={props.containerRef}
+      onClick={props.onClick}
+    >
+      <div className="inner-container">
+        <div className="text">{props.current}</div>
+      </div>
+    </div>
+  );
+};
 
 export default App;

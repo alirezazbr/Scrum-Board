@@ -2,8 +2,12 @@ import React from 'react';
 import {Route, Link} from 'react-router-dom';
 
 export function InputChange(e) {
-    const {name, value} = e.target;
-    this.setState({[name]: value});
+    const { status } = { ...this.state };
+    const currentState = status;
+    const { name, value } = e.target;
+    currentState[name] = value;
+
+    this.setState({ status: currentState });
 }
 
 export const CustomMenu = ({path, children}) => (
