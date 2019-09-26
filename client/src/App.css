@@ -35,6 +35,11 @@ header > div > button {
     border-radius: 15px;
 }
 
+header > div > button:focus {
+    outline: 0;
+}
+
+
 header > div > button > img {
     float: left;
     height: 100%;

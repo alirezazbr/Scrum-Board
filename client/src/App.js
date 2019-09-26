@@ -12,8 +12,8 @@ class App extends React.Component {
   state = {
     modal: false,
     status: {
-      title: 'Alireza',
-      Description: 'Zebardast',
+      title: '',
+      Description: '',
       bgColor: ''
     },
     listStory: [],
@@ -21,7 +21,7 @@ class App extends React.Component {
     listInProgress: [],
     listTest: [],
     listDone: [],
-    // color: ''
+    color: ''
   };
 
 
@@ -141,6 +141,7 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
         {/* <Entrance /> */}
+        
         <div className='row'>
           <header className='col-md-12'>
             <div className='col-md-3'>
@@ -212,8 +213,7 @@ class App extends React.Component {
                     listStory.map((item, index) => {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
-
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                          <header className='col-md-12'>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delStory.bind(this, index)}
