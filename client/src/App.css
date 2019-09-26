@@ -29,7 +29,6 @@ header > div {
 
 header > div > button {
     height: 100%;
-    /* text-align: right; */
     background: transparent;
     padding: 0 !important;
     border: 1px solid #909090;
@@ -65,7 +64,7 @@ header > div > input {
 
 .border-right { 
     border-right: 20px solid #AF9D00 !important;
-    /* filter: url('../public/index.html/#chalk'); */
+    padding: 0;
 }
 
 .fix {
@@ -108,28 +107,6 @@ header > div > input {
     margin-top: 25px !important;
 }
 
-.listgroup-fix {
-    color: black;
-}
-
-
-.listgroup-fix li{
-    background-color: inherit;
-}
-
-.background-red {
-    background-color: red;
-}
-.background-blue {
-    background-color: blue;
-}
-.background-yellow {
-    background-color: yellow;
-}
-.background-green {
-    background-color: green;
-}
-
 /* Card */
 
 .card {
@@ -140,18 +117,20 @@ header > div > input {
 }
 
 .card header {
-    height: 20px;
-    /* background-color: green; */
-    padding: 0;
+    height: 35px;
 }
 
 .card header p {
     text-align: left;
     float: left;
-    font-size: 30px;
+    font-size: 25px;
     position: absolute;
-    top: -10px;
+    top: 0px;
     left: 10px;
+    max-width: 105px;
+    overflow: hidden;
+    max-height: 35px;
+    padding-right: 1px;
 }
 
 .card header .li-button-fix {
@@ -168,6 +147,29 @@ header > div > input {
     width: 15px;
     height: 15px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 7px;
+    left: -3px;
+}
+
+.listgroup-fix {
+    font-family: sans-serif;
+    background-color: transparent;
+}
+
+
+.listgroup-fix li{
+    background-color: inherit;
+}
+
+.fix-box-color .color-red {
+    background-color: #BC4A4A;
+}
+.fix-box-color .color-blue {
+    background-color: #4EB4E4;
+}
+.fix-box-color .color-yellow {
+    background-color: #C9CF4E;
+}
+.fix-box-color .color-green {
+    background-color: #61D672;
 }

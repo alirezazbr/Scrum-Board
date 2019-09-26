@@ -12,15 +12,16 @@ class App extends React.Component {
   state = {
     modal: false,
     status: {
-      title: '',
-      Description: '',
+      title: 'Alireza',
+      Description: 'Zebardast',
       bgColor: ''
     },
     listStory: [],
     listTodo: [],
     listInProgress: [],
     listTest: [],
-    listDone: []
+    listDone: [],
+    // color: ''
   };
 
 
@@ -39,15 +40,6 @@ class App extends React.Component {
   addToStroy = () => {
     this.setState(prevState => {
       let { listStory, status } = prevState;
-
-      changeColor = (color) => () => {
-        this.setState({
-          status: {
-            bgColor: color
-          }
-        });
-      };
-
       let json = JSON.stringify(status);
       listStory.push(json);
       return { listStory, status: { ...status, title: '', Description: '', bgColor: '' }, modal: false };
@@ -126,16 +118,26 @@ class App extends React.Component {
     });
   };
 
+  changeColor = (color) => () => {
+    this.setState(prevState => {
+      let { status } = prevState;
+      return {
+        status: {
+          ...status,
+          bgColor: color
+        }
+      }
+    });
+  };
+
   render() {
     const { modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
-
-
-    let { title, Description, bgColor } = this.state.status;
-    const taskUlClass = classNames('listgroup-fix', 'card'/*,
-      { 'background-red': color === 'red' },
-      { 'background-blue': color === 'blue' },
-      { 'background-yellow': color === 'yellow' },
-      { 'background-green': color === 'green' }*/);
+    let { title, Description } = this.state.status;
+    const taskUlClass = classNames('listgroup-fix', 'card',
+      { 'background-red': color === '#BC4A4A' },
+      { 'background-blue': color === '#4EB4E4' },
+      { 'background-yellow': color === '#C9CF4E' },
+      { 'background-green': color === '#61D672' });
     return (
       <div className="container-fluid">
         {/* <Entrance /> */}
@@ -158,21 +160,15 @@ class App extends React.Component {
                 </ModalBody>
                 <ModalFooter>
                   <div className='fix-box-color'>
-                    <Button color='danger' className='fix-box-item' id='red' onClick={this.addToStroy} >
-                      {/* {bgColor = 'red'} */}
-                    </Button>
-                    <Button color='info' className='fix-box-item' id='blue' onClick={this.addToStroy} >
-                      {/* {bgColor = 'blue'} */}
-                    </Button>
-                    <Button color='warning' className='fix-box-item' id='yellow' onClick={this.changeColor('yellow')} />
-                    <Button color='success' className='fix-box-item' id='green' onClick={this.changeColor('green')} />
+                    <Button className='fix-box-item color-red' onClick={this.changeColor('#BC4A4A')} />
+                    <Button className='fix-box-item color-blue' onClick={this.changeColor('#4EB4E4')} />
+                    <Button className='fix-box-item color-yellow' onClick={this.changeColor('#C9CF4E')} />
+                    <Button className='fix-box-item color-green' onClick={this.changeColor('#61D672')} />
                   </div>
                   <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                   <Button color="primary" onClick={this.addToStroy}>Save</Button>
                 </ModalFooter>
               </Modal>
-
-
             </div>
 
             <div className='col-md-4 offset-md-1'>
@@ -217,7 +213,7 @@ class App extends React.Component {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
 
-                          <header className='col-md-12' style={{ backgroundColor: bgColor }}>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delStory.bind(this, index)}
