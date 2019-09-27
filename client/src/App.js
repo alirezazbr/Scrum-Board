@@ -276,8 +276,8 @@ class App extends React.Component {
                                 <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
                               </button>
                             </header>
-                            <Col xs={12}>
-                              <p>{JSON.parse(item).Description}</p>
+                            <Col xs={12} className='card-body-fix'>
+                              <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
                             </Col>
                           </ListGroupItem>
                         )
@@ -318,8 +318,8 @@ class App extends React.Component {
                               <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
                             </button>
                           </header>
-                          <Col xs={12}>
-                            <p>{JSON.parse(item).Description}</p>
+                          <Col xs={12} className='card-body-fix'>
+                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
                           </Col>
                         </ListGroupItem>
                       )
@@ -357,8 +357,8 @@ class App extends React.Component {
                               <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
                             </button>
                           </header>
-                          <Col xs={12}>
-                            <p>{JSON.parse(item).Description}</p>
+                          <Col xs={12} className='card-body-fix'>
+                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
                           </Col>
                         </ListGroupItem>
                       )
@@ -396,8 +396,8 @@ class App extends React.Component {
                               <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
                             </button>
                           </header>
-                          <Col xs={12}>
-                            <p>{JSON.parse(item).Description}</p>
+                          <Col xs={12} className='card-body-fix'>
+                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
                           </Col>
                         </ListGroupItem>
                       )
