@@ -6,6 +6,10 @@ import classNames from "classnames";
 // import {default as Entrance} from './components/login/EntrancePermissonPage';
 import Timer from './components/timer/Timer';
 import './App.css';
+import { Draggable, Droppable } from 'react-drag-and-drop'
+
+// draggable importing
+// import Draggable from 'react-draggable';
 
 class App extends React.Component {
 
@@ -141,7 +145,7 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
         {/* <Entrance /> */}
-        
+
         <div className='row'>
           <header className='col-md-12'>
             <div className='col-md-3'>
@@ -212,26 +216,28 @@ class App extends React.Component {
                   listStory.length !== 0 ?
                     listStory.map((item, index) => {
                       return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12'>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delStory.bind(this, index)}
-                              className='float-right li-button-fix'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListTodo.bind(this, item)}
-                              className='float-right li-button-fix'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12}>
-                            <p>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
+                        <Draggable>
+                          <ListGroupItem key={index} className={taskUlClass}>
+                            <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                              <p>{JSON.parse(item).title}</p>
+                              <button
+                                onClick={this.delStory.bind(this, index)}
+                                className='float-right li-button-fix'
+                              >
+                                <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                              </button>
+                              <button
+                                onClick={this.addToListTodo.bind(this, item)}
+                                className='float-right li-button-fix'
+                              >
+                                <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                              </button>
+                            </header>
+                            <Col xs={12} className='card-body-fix'>
+                              <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
+                            </Col>
+                          </ListGroupItem>
+                        </Draggable>
                       )
                     })
                     :
@@ -242,44 +248,50 @@ class App extends React.Component {
               </ListGroup>
             </Col>
           </div>
+
           <div className='col-md-2 border-right'>
-            <Col md={12} className='mt-4'>
-              <ListGroup>
-                {
-                  listTodo.length !== 0 ?
-                    listTodo.map((item, index) => {
-                      return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12'>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delTodo.bind(this, index)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListInprogress.bind(this, item)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12}>
-                            <p>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
+            <Droppable>
+              <Col md={12} className='mt-4'>
+
+                <ListGroup>
+                  {
+                    listTodo.length !== 0 ?
+                      listTodo.map((item, index) => {
+                        return (
+                          <ListGroupItem key={index} className={taskUlClass}>
+                            <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                              <p>{JSON.parse(item).title}</p>
+                              <button
+                                onClick={this.delTodo.bind(this, index)}
+                                className='float-right li-button-fix'
+                                color='danger'
+                              >
+                                <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                              </button>
+                              <button
+                                onClick={this.addToListInprogress.bind(this, item)}
+                                className='float-right li-button-fix'
+                                color='danger'
+                              >
+                                <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                              </button>
+                            </header>
+                            <Col xs={12}>
+                              <p>{JSON.parse(item).Description}</p>
+                            </Col>
+                          </ListGroupItem>
+                        )
+                      })
+                      :
+                      (
+                        console.log('Empty Task')
                       )
-                    })
-                    :
-                    (
-                      console.log('Empty Task')
-                    )
-                }
-              </ListGroup>
-            </Col>
+                  }
+                </ListGroup>
+
+              </Col>
+
+            </Droppable>
           </div>
           <div className='col-md-4 border-right'>
             <Col md={12} className='mt-4'>
@@ -289,7 +301,7 @@ class App extends React.Component {
                     listInProgress.map((item, index) => {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12'>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delInProgress.bind(this, index)}
@@ -328,7 +340,7 @@ class App extends React.Component {
                     listTest.map((item, index) => {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12'>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delTest.bind(this, index)}
@@ -367,7 +379,7 @@ class App extends React.Component {
                     listDone.map((item, index) => {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12'>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delDone.bind(this, index)}

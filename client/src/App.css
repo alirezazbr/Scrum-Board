@@ -116,23 +116,28 @@ header > div > input {
 
 .card {
     background-color: none !important;
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
     padding: 0;
-    height: 80px
+    min-height: 80px
+}
+
+.card-body-fix {
+    font-size: 2vw;
 }
 
 .card header {
     height: 35px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
 .card header p {
     text-align: left;
     float: left;
-    font-size: 25px;
+    font-size: 2vw;
     position: absolute;
     top: 0px;
     left: 10px;
-    max-width: 105px;
+    max-width: 84px;
     overflow: hidden;
     max-height: 35px;
     padding-right: 1px;
