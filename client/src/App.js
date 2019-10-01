@@ -3,11 +3,20 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Col, ListGroup, Lis
 import Input from "reactstrap/es/Input";
 import { InputChange } from './components/utility/Utility';
 import classNames from "classnames";
-// import {default as Entrance} from './components/login/EntrancePermissonPage';
 import Timer from './components/timer/Timer';
 import './App.css';
-import { Draggable, Droppable } from 'react-drag-and-drop'
 
+// Login & Register pages
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Navbar from './components/verify/Navbar';
+import Landing from './components/verify/Landing';
+import Login from './components/verify/Login';
+import Register from './components/verify/Register';
+import Profile from './components/verify/Profile';
+
+// import {default as Entrance} from './components/login/EntrancePermissonPage';
+// import { Draggable, Droppable } from 'react-drag-and-drop';
 // draggable importing
 // import Draggable from 'react-draggable';
 
@@ -144,6 +153,20 @@ class App extends React.Component {
       { 'background-green': color === '#61D672' });
     return (
       <div className="container-fluid">
+
+
+        <Router>
+          <div className='App'>
+            <Navbar />
+            <Route exact path='/' component={Landing} />
+            <div className='container'>
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/profile' component={Profile} />
+            </div>
+          </div>
+        </Router>
+
         {/* <Entrance /> */}
 
         <div className='row'>
@@ -216,28 +239,26 @@ class App extends React.Component {
                   listStory.length !== 0 ?
                     listStory.map((item, index) => {
                       return (
-                        <Draggable>
-                          <ListGroupItem key={index} className={taskUlClass}>
-                            <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                              <p>{JSON.parse(item).title}</p>
-                              <button
-                                onClick={this.delStory.bind(this, index)}
-                                className='float-right li-button-fix'
-                              >
-                                <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                              </button>
-                              <button
-                                onClick={this.addToListTodo.bind(this, item)}
-                                className='float-right li-button-fix'
-                              >
-                                <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                              </button>
-                            </header>
-                            <Col xs={12} className='card-body-fix'>
-                              <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                            </Col>
-                          </ListGroupItem>
-                        </Draggable>
+                        <ListGroupItem key={index} className={taskUlClass}>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                            <p>{JSON.parse(item).title}</p>
+                            <button
+                              onClick={this.delStory.bind(this, index)}
+                              className='float-right li-button-fix'
+                            >
+                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                            </button>
+                            <button
+                              onClick={this.addToListTodo.bind(this, item)}
+                              className='float-right li-button-fix'
+                            >
+                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                            </button>
+                          </header>
+                          <Col xs={12} className='card-body-fix'>
+                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
+                          </Col>
+                        </ListGroupItem>
                       )
                     })
                     :
@@ -250,48 +271,45 @@ class App extends React.Component {
           </div>
 
           <div className='col-md-2 border-right'>
-            <Droppable>
-              <Col md={12} className='mt-4'>
+            <Col md={12} className='mt-4'>
 
-                <ListGroup>
-                  {
-                    listTodo.length !== 0 ?
-                      listTodo.map((item, index) => {
-                        return (
-                          <ListGroupItem key={index} className={taskUlClass}>
-                            <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                              <p>{JSON.parse(item).title}</p>
-                              <button
-                                onClick={this.delTodo.bind(this, index)}
-                                className='float-right li-button-fix'
-                                color='danger'
-                              >
-                                <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                              </button>
-                              <button
-                                onClick={this.addToListInprogress.bind(this, item)}
-                                className='float-right li-button-fix'
-                                color='danger'
-                              >
-                                <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                              </button>
-                            </header>
-                            <Col xs={12} className='card-body-fix'>
-                              <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                            </Col>
-                          </ListGroupItem>
-                        )
-                      })
-                      :
-                      (
-                        console.log('Empty Task')
+              <ListGroup>
+                {
+                  listTodo.length !== 0 ?
+                    listTodo.map((item, index) => {
+                      return (
+                        <ListGroupItem key={index} className={taskUlClass}>
+                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                            <p>{JSON.parse(item).title}</p>
+                            <button
+                              onClick={this.delTodo.bind(this, index)}
+                              className='float-right li-button-fix'
+                              color='danger'
+                            >
+                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                            </button>
+                            <button
+                              onClick={this.addToListInprogress.bind(this, item)}
+                              className='float-right li-button-fix'
+                              color='danger'
+                            >
+                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                            </button>
+                          </header>
+                          <Col xs={12} className='card-body-fix'>
+                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
+                          </Col>
+                        </ListGroupItem>
                       )
-                  }
-                </ListGroup>
+                    })
+                    :
+                    (
+                      console.log('Empty Task')
+                    )
+                }
+              </ListGroup>
 
-              </Col>
-
-            </Droppable>
+            </Col>
           </div>
           <div className='col-md-4 border-right'>
             <Col md={12} className='mt-4'>
@@ -371,7 +389,7 @@ class App extends React.Component {
               </ListGroup>
             </Col>
           </div>
-          <div className='col-md-2'>
+          <div className='col-md-2 fix-ListDone'>
             <Col md={12} className='mt-4'>
               <ListGroup>
                 {

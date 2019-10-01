@@ -83,7 +83,8 @@ header > div > input {
 }
 
 
-.full-height > .border-right {
+.full-height > .border-right,
+.fix-ListDone {
     max-height: 100%;
     overflow-y: auto;
 }
@@ -133,7 +134,7 @@ header > div > input {
 .card header p {
     text-align: left;
     float: left;
-    font-size: 2vw;
+    font-size: 25px;
     position: absolute;
     top: 0px;
     left: 10px;
