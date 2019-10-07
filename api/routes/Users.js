@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express();
 const users = express.Router();
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,7 @@ users.post('/register', (req, res) => {
         last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password,
-        created: today
+        created: today,
     };
 
     User.findOne({
@@ -79,8 +80,8 @@ users.get('/profile', (req, res) => {
         _id: decoded._id
     })
         .then(user => {
-            if(user) {
-                res.json(user)
+            if (user) {
+                res.json(user);
             } else {
                 res.send('User does not exist');
             }

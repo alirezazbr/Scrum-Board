@@ -8,7 +8,7 @@ export default class Register extends React.Component {
             first_name: '',
             last_name: '',
             email: '',
-            password: ''
+            password: '',
         };
 
         this.onChange = this.onChange.bind(this);
@@ -26,7 +26,7 @@ export default class Register extends React.Component {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
         };
 
         register(user).then(res => {
@@ -42,7 +42,6 @@ export default class Register extends React.Component {
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
                             <div className='form-group'>
-                                <label htmlFor='first_name'>First Name</label>
                                 <input type='text'
                                     className='form-control'
                                     name='first_name'
@@ -52,7 +51,6 @@ export default class Register extends React.Component {
                                 />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='last_name'>Last Name</label>
                                 <input type='text'
                                     className='form-control'
                                     name='last_name'
@@ -62,7 +60,6 @@ export default class Register extends React.Component {
                                 />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='email'>Email Address</label>
                                 <input type='email'
                                     className='form-control'
                                     name='email'
@@ -72,7 +69,6 @@ export default class Register extends React.Component {
                                 />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='password'>Password</label>
                                 <input type='password'
                                     className='form-control'
                                     name='password'

@@ -21,8 +21,10 @@ mongoose
     .catch(err => console.log(err));
 
 let Users = require('./routes/Users');
+let Todo = require('./routes/Todo');
 
 app.use('/users', Users);
+app.use('/todos', Todo);
 
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);

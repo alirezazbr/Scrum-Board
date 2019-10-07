@@ -18,11 +18,12 @@ export default class Profile extends Component {
         this.setState({
             first_name: decoded.first_name,
             last_name: decoded.last_name,
-            email: decoded.email
+            email: decoded.email,
         });
     }
 
     render() {
+        const { todo } = this.state;
         return (
             <div className='container'>
                 <div className='jumbotron mt-5'>
@@ -34,7 +35,6 @@ export default class Profile extends Component {
                             <tr>
                                 <td>First Name</td>
                                 <td>{this.state.first_name}</td>
-                                {console.log(this.state.first_name)}
                             </tr>
                             <tr>
                                 <td>Last Name</td>

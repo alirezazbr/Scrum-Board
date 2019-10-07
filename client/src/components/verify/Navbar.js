@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                 </li>
                 <li className='nav-item'>
                     <a href='' onClick={this.logOut.bind(this)} className='nav-link'>
-                        Register
+                        Logout
                     </a>
                 </li>
             </ul>

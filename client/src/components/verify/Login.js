@@ -40,7 +40,6 @@ export default class Login extends React.Component {
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
                             <div className='form-group'>
-                                <label htmlFor='email'>Email Address</label>
                                 <input type='email'
                                     className='form-control'
                                     name='email'
@@ -50,7 +49,6 @@ export default class Login extends React.Component {
                                 />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='password'>Password</label>
                                 <input type='password'
                                     className='form-control'
                                     name='password'
