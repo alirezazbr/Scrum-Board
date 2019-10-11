@@ -18,7 +18,8 @@ import axios from 'axios';
 export default class ScrumBoard extends React.Component {
 
   state = {
-    modal: false,
+    task_modal: false,
+    user_modal: false,
     status: {
       title: '',
       Description: '',
@@ -33,7 +34,8 @@ export default class ScrumBoard extends React.Component {
   };
 
 
-  toggle = () => this.setState(prevState => ({ modal: !prevState.modal }));
+  taskToggle = () => this.setState(prevState => ({ task_modal: !prevState.task_modal }));
+  userToggle = () => this.setState(prevState => ({ user_modal: !prevState.user_modal }));
 
   // componentDidMount() {
   //   axios.get('http://localhost:5000/todos')
@@ -73,12 +75,12 @@ export default class ScrumBoard extends React.Component {
         bgColor: prevState.status.bgColor,
       }
 
-      
+
 
       axios.post('http://localhost:5000/todos/add', newTodo)
         .then(res => console.log(res.data));
 
-      return { listStory, status: { ...status, title: '', Description: '', bgColor: '' }, modal: false };
+      return { listStory, status: { ...status, title: '', Description: '', bgColor: '' }, task_modal: false };
     });
   };
 
@@ -167,7 +169,7 @@ export default class ScrumBoard extends React.Component {
   };
 
   render() {
-    const { modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
+    const { task_modal, user_modal, listStory, listTodo, listInProgress, listTest, listDone, color } = this.state;
     let { title, Description } = this.state.status;
     const taskUlClass = classNames('listgroup-fix', 'card',
       { 'background-red': color === '#BC4A4A' },
@@ -179,42 +181,78 @@ export default class ScrumBoard extends React.Component {
         <div className='row'>
           <header className='col-md-12'>
             <div className='col-md-3'>
-              <button className='col-md-6' onClick={this.toggle}>
+              <button className='col-md-6' onClick={this.taskToggle}>
                 <img src={process.env.PUBLIC_URL + '/assets/img/plus.png'} alt='' />
-                <div className='inner-text-of-button-header'>Task</div>
+                <div className='inner-text-of-button-header task-div'>Task</div>
               </button>
 
-              <Modal isOpen={modal} toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>
+              <Modal isOpen={task_modal} toggle={this.taskToggle}>
+                <ModalHeader toggle={this.taskToggle}>
                   <p className='modalheader-font-fix'>New Task</p>
                 </ModalHeader>
                 <ModalBody>
-                  <Input placeholder='title' name='title' value={title} onChange={InputChange.bind(this)} />
-                  <Input placeholder='Description' name='Description' value={Description} onChange={InputChange.bind(this)} />
+                  <Input
+                    className='input-font-fix'
+                    placeholder='title'
+                    name='title'
+                    value={title}
+                    onChange={InputChange.bind(this)}
+                  />
+                  <Input
+                    className='input-font-fix'
+                    placeholder='Description'
+                    name='Description'
+                    value={Description}
+                    onChange={InputChange.bind(this)}
+                  />
+                  <label className='label-for-datepicker' for="male">Pick a Deadline for your task</label>
                   <Timer />
                 </ModalBody>
                 <ModalFooter>
                   <div className='fix-box-color'>
-                    <Button className='fix-box-item color-red' onClick={this.changeColor('#BC4A4A')} />
-                    <Button className='fix-box-item color-blue' onClick={this.changeColor('#4EB4E4')} />
-                    <Button className='fix-box-item color-yellow' onClick={this.changeColor('#C9CF4E')} />
-                    <Button className='fix-box-item color-green' onClick={this.changeColor('#61D672')} />
+                    <Button
+                      className='fix-box-item color-red'
+                      onClick={this.changeColor('#BC4A4A')}
+                    />
+                    <Button
+                      className='fix-box-item color-blue'
+                      onClick={this.changeColor('#4EB4E4')}
+                    />
+                    <Button
+                      className='fix-box-item color-yellow'
+                      onClick={this.changeColor('#C9CF4E')}
+                    />
+                    <Button
+                      className='fix-box-item color-green'
+                      onClick={this.changeColor('#61D672')}
+                    />
                   </div>
-                  <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                  <Button color="secondary" onClick={this.taskToggle}>Cancel</Button>
                   <Button color="primary" onClick={this.addToStroy}>Save</Button>
                 </ModalFooter>
               </Modal>
             </div>
 
             <div className='col-md-4 offset-md-1'>
-              <button className='col-md-6'>
+              <button className='col-md-6' onClick={this.userToggle}>
                 <img src={process.env.PUBLIC_URL + '/assets/img/group.png'} alt='' />
-                <div className='inner-text-of-button-header'>User</div>
+                <div className='inner-text-of-button-header user-div'>User</div>
               </button>
+
+              <Modal isOpen={user_modal} toggle={this.userToggle}>
+                <ModalHeader toggle={this.userToggle}>
+                  <p className='modalheader-font-fix'>Sign Out</p>
+                </ModalHeader>
+                <ModalFooter>
+                  <Button color="secondary" onClick={this.userToggle}>Cancel</Button>
+                  <Button color="danger" onClick={this.addToStroy}>SignOut</Button>
+                </ModalFooter>
+              </Modal>
+
             </div>
 
             <div className='col-md-3 offset-md-1'>
-              <input className='col-md-6' placeholder='Search your task' />
+              <input className='col-md-6' placeholder='Search task' />
             </div>
           </header>
         </div>

@@ -19,7 +19,8 @@ header {
     height: 30px;
     padding: 0 !important;
 }
-header > div {
+
+header>div {
     height: 25px;
     float: left;
     margin-top: 2.5px;
@@ -27,7 +28,7 @@ header > div {
     position: relative;
 }
 
-header > div > button {
+header>div>button {
     height: 100%;
     background: transparent;
     padding: 0 !important;
@@ -35,12 +36,16 @@ header > div > button {
     border-radius: 15px;
 }
 
-header > div > button:focus {
+/* background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff)); */
+
+header>div>button:focus,
+.card header .li-button-fix:focus,
+header>div>input:focus {
     outline: 0;
 }
 
 
-header > div > button > img {
+header>div>button>img {
     float: left;
     height: 100%;
     margin-left: 10px;
@@ -52,23 +57,34 @@ header > div > button > img {
     top: -10px;
     right: 10px;
     padding: 0;
-    color: #8AF0D1;
     font-size: 30px;
     font-weight: 500;
 }
 
-header > div > input {
+.task-div {
+    color: #8AF0D1;
+}
+
+.user-div {
+    color: #F1AE38;
+}
+
+header>div>input {
     height: 100%;
     border-radius: 15px;
     border: none;
     background: #DDDDDD;
-    font-size: 20px;
+    font-family: Sans-Serif;
+    font-size: 15px;
     font-weight: 500;
-    color: #CF4040;
+    color: #4E4942;
 }
 
-.border-right { 
-    border-right: 20px solid #AF9D00 !important;
+.border-right {
+    /* border-right-width: 5px !important;
+    -webkit-border-image: linear-gradient(to right, red, purple)0 100% 0 0 stretch; */
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, transparent), color-stop(0.5, grey), color-stop(0.5, grey), color-stop(1, transparent)) 0 100%;
+    border-right-width: 1px;
     padding: 0;
 }
 
@@ -79,11 +95,15 @@ header > div > input {
 }
 
 .border-bottom {
-    border-bottom: 20px solid #AF9D00 !important
+    border-bottom-width: 10px !important;
+    /* -webkit-border-image: -webkit-gradient(linear, top, bottom, from(#e00), to(#fff))0 0 100% 0 stretch; */
+    -webkit-border-image: linear-gradient(to right, red, purple)0 0 100% 0 stretch;
+
+
 }
 
 
-.full-height > .border-right,
+.full-height>.border-right,
 .fix-ListDone {
     max-height: 100%;
     overflow-y: auto;
@@ -96,6 +116,8 @@ header > div > input {
     color: black !important;
     font-weight: 900;
     font-size: 50px;
+    margin-bottom: -1rem;
+    text-align: center;
 }
 
 .fix-box-color {
@@ -109,8 +131,19 @@ header > div > input {
     margin-left: 10px;
 }
 
-.react-datepicker {
+/* .react-datepicker {
     margin-top: 25px !important;
+} */
+
+.input-font-fix {
+    font-family: "Times New Roman", Times, serif;
+    margin-bottom: 5px;
+    color: #6D6D6D;
+}
+
+.label-for-datepicker {
+    color: #E50C54;
+    font-size: 20px;
 }
 
 /* Card */
@@ -128,7 +161,7 @@ header > div > input {
 
 .card header {
     height: 35px;
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
 .card header p {
@@ -168,19 +201,22 @@ header > div > input {
 }
 
 
-.listgroup-fix li{
+.listgroup-fix li {
     background-color: inherit;
 }
 
 .fix-box-color .color-red {
     background-color: #BC4A4A;
 }
+
 .fix-box-color .color-blue {
     background-color: #4EB4E4;
 }
+
 .fix-box-color .color-yellow {
     background-color: #C9CF4E;
 }
+
 .fix-box-color .color-green {
     background-color: #61D672;
 }
