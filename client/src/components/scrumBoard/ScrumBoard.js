@@ -30,7 +30,7 @@ export default class ScrumBoard extends React.Component {
     listInProgress: [],
     listTest: [],
     listDone: [],
-    color: ''
+    color: '#424242'
   };
 
 
@@ -205,7 +205,7 @@ export default class ScrumBoard extends React.Component {
                     value={Description}
                     onChange={InputChange.bind(this)}
                   />
-                  <label className='label-for-datepicker' for="male">Pick a Deadline for your task</label>
+                  <label className='label-for-datepicker'>Pick a Deadline for your task</label>
                   <Timer />
                 </ModalBody>
                 <ModalFooter>
@@ -258,73 +258,78 @@ export default class ScrumBoard extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='col-md-2 border-right border-bottom fix'>
+          <div className='col-md-2 fix'>
             Story
           </div>
-          <div className='col-md-2 border-right border-bottom fix'>
+          <div className='col-md-2 fix'>
             ToDo
           </div>
-          <div className='col-md-4 border-right border-bottom fix'>
+          <div className='col-md-4 fix'>
             In Progress
           </div>
-          <div className='col-md-2 border-right border-bottom fix'>
+          <div className='col-md-2 fix'>
             Test
           </div>
-          <div className='col-md-2 border-bottom fix'>
+          <div className='col-md-2 fix'>
             Done
           </div>
         </div>
 
+        <hr className='hr-fixing' />
+
         <div className='row full-height'>
           {/* Story List */}
-          <div className='col-md-2 border-right'>
-            <Col md={12} className='mt-4'>
+          <div className='col-md-2 card-box-fixing'>
+            <Col md={12} className='mt-4 the-col-of-inner-column'>
               <ListGroup>
                 {
-                  listStory.length !== 0 ?
-                    listStory.map((item, index) => {
-                      return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delStory.bind(this, index)}
-                              className='float-right li-button-fix'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListTodo.bind(this, item)}
-                              className='float-right li-button-fix'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12} className='card-body-fix'>
-                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
-                      )
-                    })
-                    :
-                    (
-                      console.log('Empty Task')
+                  listStory.map((item, index) => {
+                    return (
+                      <ListGroupItem key={index} className={taskUlClass}>
+                        <header className='col-md-12' style={{
+                          backgroundColor: JSON.parse(item).bgColor,
+                          borderRadius: 20
+                        }}>
+                          <p>{JSON.parse(item).title}</p>
+                          <button
+                            onClick={this.delStory.bind(this, index)}
+                            className='float-right li-button-fix'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                          </button>
+                          <button
+                            onClick={this.addToListTodo.bind(this, item)}
+                            className='float-right li-button-fix'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                          </button>
+                        </header>
+                        <Col xs={12} className='card-body-fix'>
+                          <p className='the-font-fixing-of-the-card' style={{ color: color }}>{JSON.parse(item).Description}</p>
+                        </Col>
+                      </ListGroupItem>
                     )
+                  })
                 }
               </ListGroup>
             </Col>
           </div>
 
-          <div className='col-md-2 border-right'>
-            <Col md={12} className='mt-4'>
+          <vr className='vr-fixing' />
+          
+          <div className='col-md-2 parent'>
+            <div className='col-md-12 card-box-fixing child'>
+              <Col md={12} className='mt-4 the-col-of-inner-column'>
 
-              <ListGroup>
-                {
-                  listTodo.length !== 0 ?
+                <ListGroup>
+                  {
                     listTodo.map((item, index) => {
                       return (
                         <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
+                          <header className='col-md-12' style={{
+                            backgroundColor: JSON.parse(item).bgColor,
+                            borderRadius: 20
+                          }}>
                             <p>{JSON.parse(item).title}</p>
                             <button
                               onClick={this.delTodo.bind(this, index)}
@@ -342,133 +347,132 @@ export default class ScrumBoard extends React.Component {
                             </button>
                           </header>
                           <Col xs={12} className='card-body-fix'>
-                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
+                            <p className='the-font-fixing-of-the-card' style={{ color: color }}>{JSON.parse(item).Description}</p>
                           </Col>
                         </ListGroupItem>
                       )
                     })
-                    :
-                    (
-                      console.log('Empty Task')
-                    )
-                }
-              </ListGroup>
+                  }
+                </ListGroup>
 
-            </Col>
+              </Col>
+            </div>
           </div>
-          <div className='col-md-4 border-right'>
-            <Col md={12} className='mt-4'>
+          <vr className='vr-fixing' />
+
+          <div className='col-md-4 card-box-fixing'>
+            <Col md={12} className='mt-4 the-col-of-inner-column'>
               <ListGroup>
                 {
-                  listInProgress.length !== 0 ?
-                    listInProgress.map((item, index) => {
-                      return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delInProgress.bind(this, index)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListTest.bind(this, item)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12} className='card-body-fix'>
-                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
-                      )
-                    })
-                    :
-                    (
-                      console.log('Empty Task')
+                  listInProgress.map((item, index) => {
+                    return (
+                      <ListGroupItem key={index} className={taskUlClass}>
+                        <header className='col-md-12' style={{
+                          backgroundColor: JSON.parse(item).bgColor,
+                          borderRadius: 20
+                        }}>
+                          <p>{JSON.parse(item).title}</p>
+                          <button
+                            onClick={this.delInProgress.bind(this, index)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                          </button>
+                          <button
+                            onClick={this.addToListTest.bind(this, item)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                          </button>
+                        </header>
+                        <Col xs={12} className='card-body-fix'>
+                          <p className='the-font-fixing-of-the-card' style={{ color: color }}>{JSON.parse(item).Description}</p>
+                        </Col>
+                      </ListGroupItem>
                     )
+                  })
                 }
               </ListGroup>
             </Col>
           </div>
-          <div className='col-md-2 border-right'>
-            <Col md={12} className='mt-4'>
+
+          <vr className='vr-fixing' />
+
+          <div className='col-md-2 card-box-fixing'>
+            <Col md={12} className='mt-4 the-col-of-inner-column'>
               <ListGroup>
                 {
-                  listTest.length !== 0 ?
-                    listTest.map((item, index) => {
-                      return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delTest.bind(this, index)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListDone.bind(this, item)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12} className='card-body-fix'>
-                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
-                      )
-                    })
-                    :
-                    (
-                      console.log('Empty Task')
+                  listTest.map((item, index) => {
+                    return (
+                      <ListGroupItem key={index} className={taskUlClass}>
+                        <header className='col-md-12' style={{
+                          backgroundColor: JSON.parse(item).bgColor,
+                          borderRadius: 20
+                        }}>
+                          <p>{JSON.parse(item).title}</p>
+                          <button
+                            onClick={this.delTest.bind(this, index)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                          </button>
+                          <button
+                            onClick={this.addToListDone.bind(this, item)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                          </button>
+                        </header>
+                        <Col xs={12} className='card-body-fix'>
+                          <p className='the-font-fixing-of-the-card' style={{ color: color }}>{JSON.parse(item).Description}</p>
+                        </Col>
+                      </ListGroupItem>
                     )
+                  })
                 }
               </ListGroup>
             </Col>
           </div>
-          <div className='col-md-2 fix-ListDone'>
-            <Col md={12} className='mt-4'>
+
+          <vr className='vr-fixing' />
+
+          <div className='card-of-listDone card-box-fixing'>
+            <Col md={12} className='mt-4 the-col-of-inner-column'>
               <ListGroup>
                 {
-                  listDone.length !== 0 ?
-                    listDone.map((item, index) => {
-                      return (
-                        <ListGroupItem key={index} className={taskUlClass}>
-                          <header className='col-md-12' style={{ backgroundColor: JSON.parse(item).bgColor }}>
-                            <p>{JSON.parse(item).title}</p>
-                            <button
-                              onClick={this.delDone.bind(this, index)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
-                            </button>
-                            <button
-                              onClick={this.addToListDone.bind(this, item)}
-                              className='float-right li-button-fix'
-                              color='danger'
-                            >
-                              <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
-                            </button>
-                          </header>
-                          <Col xs={12} className='card-body-fix'>
-                            <p style={{ color: JSON.parse(item).bgColor }}>{JSON.parse(item).Description}</p>
-                          </Col>
-                        </ListGroupItem>
-                      )
-                    })
-                    :
-                    (
-                      console.log('Empty Task')
+                  listDone.map((item, index) => {
+                    return (
+                      <ListGroupItem key={index} className={taskUlClass}>
+                        <header className='col-md-12' style={{
+                          backgroundColor: JSON.parse(item).bgColor,
+                          borderRadius: 20
+                        }}>
+                          <p>{JSON.parse(item).title}</p>
+                          <button
+                            onClick={this.delDone.bind(this, index)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/cancel.png'} alt='' />
+                          </button>
+                          <button
+                            onClick={this.addToListDone.bind(this, item)}
+                            className='float-right li-button-fix'
+                            color='danger'
+                          >
+                            <img src={process.env.PUBLIC_URL + '/assets/img/check.png'} alt='' />
+                          </button>
+                        </header>
+                        <Col xs={12} className='card-body-fix'>
+                          <p className='the-font-fixing-of-the-card' style={{ color: color }}>{JSON.parse(item).Description}</p>
+                        </Col>
+                      </ListGroupItem>
                     )
+                  })
                 }
               </ListGroup>
             </Col>

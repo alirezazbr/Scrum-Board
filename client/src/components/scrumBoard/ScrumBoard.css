@@ -1,9 +1,14 @@
 body {
     text-align: center;
+    height: 99%;
+    /* border: 1px solid red; */
+    overflow:hidden;
 }
 
 .container-fluid {
     position: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 html,
@@ -80,33 +85,38 @@ header>div>input {
     color: #4E4942;
 }
 
-.border-right {
-    /* border-right-width: 5px !important;
-    -webkit-border-image: linear-gradient(to right, red, purple)0 100% 0 0 stretch; */
-    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, transparent), color-stop(0.5, grey), color-stop(0.5, grey), color-stop(1, transparent)) 0 100%;
-    border-right-width: 1px;
-    padding: 0;
-}
-
 .fix {
     height: 85px;
     font-size: 50px;
     font-weight: 900;
 }
 
-.border-bottom {
-    border-bottom-width: 10px !important;
-    /* -webkit-border-image: -webkit-gradient(linear, top, bottom, from(#e00), to(#fff))0 0 100% 0 stretch; */
-    -webkit-border-image: linear-gradient(to right, red, purple)0 0 100% 0 stretch;
 
-
+.hr-fixing {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 5px;
+    /* background-color: red; */
+    background: linear-gradient(to right,
+            #E13E3E,
+            #EAAA0B,
+            #B5D50F,
+            #40DE2F,
+            #2FDEC2,
+            #8A2FDE,
+            #DE2F93);
 }
 
-
-.full-height>.border-right,
-.fix-ListDone {
-    max-height: 100%;
-    overflow-y: auto;
+.vr-fixing {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 5px;
+    background-color: #EE3807;
+    /* background: linear-gradient(to right,
+            #E13E3E,
+            #EAAA0B); */
 }
 
 
@@ -148,33 +158,53 @@ header>div>input {
 
 /* Card */
 
+.parent {
+    /* float: left; */
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.child {
+    height: 99%;
+    overflow: auto;
+}
+
+.card-box-fixing {
+    margin: 0;
+    padding: 0;
+}
+
 .card {
     background-color: none !important;
     margin-bottom: 10px !important;
     padding: 0;
-    min-height: 80px
+    min-height: 80px;
 }
 
-.card-body-fix {
-    font-size: 2vw;
+.the-font-fixing-of-the-card {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .card header {
     height: 35px;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .card header p {
     text-align: left;
     float: left;
-    font-size: 25px;
     position: absolute;
+    font-size: 24px;
     top: 0px;
     left: 10px;
-    max-width: 84px;
+    width: 100%;
     overflow: hidden;
     max-height: 35px;
-    padding-right: 1px;
+    padding-right: 54px;
+
 }
 
 .card header .li-button-fix {
@@ -197,12 +227,14 @@ header>div>input {
 
 .listgroup-fix {
     font-family: sans-serif;
-    background-color: transparent;
+    background-color: #DEE2E2;
+    border-radius: 20px 20px 10px 10px !important;
 }
 
 
 .listgroup-fix li {
     background-color: inherit;
+    border-radius: 20px !important;
 }
 
 .fix-box-color .color-red {
@@ -219,4 +251,22 @@ header>div>input {
 
 .fix-box-color .color-green {
     background-color: #61D672;
+}
+
+.full-height,
+.inner-full-height-column {
+    margin: 0;
+    padding: 0;
+}
+
+.the-col-of-inner-column {
+    padding: 0 5px;
+}
+
+.listgroup-fix-backgroundColor {
+    background-color: red;
+}
+
+.card-of-listDone {
+    width: 14%;
 }

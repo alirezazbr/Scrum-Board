@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const users = express.Router();
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
